@@ -1,4 +1,6 @@
 $(function () {
+  const worksSlider = $('[data-slider="slick"]');
+
   /* Filter
     =====================*/
   let filter = $("[data-filter]");
@@ -44,6 +46,8 @@ $(function () {
         transform: "scale(1)",
       });
     }, 200);
+
+    worksSlider.slick("setPosition");
   });
 
   // Close
@@ -80,5 +84,33 @@ $(function () {
   //Если нажато на окно - не закрывает
   $(".modal__dialog").on("click", function (event) {
     event.stopPropagation();
+  });
+
+  /* Slider: https://kenwheeler.github.io/slick/
+    =====================*/
+
+  worksSlider.slick({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    arrows: false,
+    dots: true,
+  });
+
+  $(".slickPrev").on("click", function (event) {
+    event.preventDefault();
+
+    let currentSlider = $(this).parents(".modal").find('[data-slider="slick"]');
+
+    currentSlider.slick("slickPrev");
+  });
+
+  $(".slickNext").on("click", function (event) {
+    event.preventDefault();
+
+    let currentSlider = $(this).parents(".modal").find('[data-slider="slick"]');
+
+    currentSlider.slick("slickNext");
   });
 });
